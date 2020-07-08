@@ -1,7 +1,8 @@
 from app import app
 from flask import jsonify
 from app.controllers.user_controller import User_Controller
-from flask_jwt_extended import (jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
+from flask_jwt_extended import (
+    jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 
 
 # @app.route('/')
@@ -25,10 +26,10 @@ def get_all_members():
     return User_Controller.get_members()
 
 
-@app.route('/api/v1/members/<name>', methods=['GET'])
+@app.route('/api/v1/members/<int:user_id>', methods=['GET'])
 # @jwt_required
-def get_one_member(name):
-    return User_Controller.get_a_member(name)
+def get_one_member(user_id):
+    return User_Controller.get_a_member(user_id)
 
 
 @app.route('/api/v1/members/cells/<cell>', methods=['GET'])
@@ -41,10 +42,10 @@ def get_cell_details(cell):
 # @jwt_required
 def modify_member(name):
     return User_Controller.edit_member(gender, dateofbirth, maritalstatus,
-                      cell, educationlevel, profession, occupation,
-                      placeofwork, residence, phonecontact,
-                      emailaddress, dateofbaptism, placeofbaptism,
-                      baptisingpastor, formerreligion, name)
+                                       cell, educationlevel, profession, occupation,
+                                       placeofwork, residence, phonecontact,
+                                       emailaddress, dateofbaptism, placeofbaptism,
+                                       baptisingpastor, formerreligion, name)
 
 
 # @app.route('/api/v1/auth/login', methods=['POST'])
