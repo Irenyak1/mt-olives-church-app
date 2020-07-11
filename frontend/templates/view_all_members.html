@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My E-Church</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/images/icon.png" rel="icon">
+    <link rel="stylesheet" type="text/css" media="screen" href="./../assets/styles/admin_home2.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./../assets/styles/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./../assets/styles/admin_home.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./../assets/styles/user_home.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/styles/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body onload="getMembers()">
+    <header>
+        <div class="brand">
+            <span>SDA MT.OLIVES CHURCH</span>
+        </div>
+        <ul>
+            <li class="dropdown">
+                <div class="dropdown-content">
+                    <a href="../user/user_settings.html"><i class="fa fa-user"></i> Profile</a>
+            <li><a href="../../index.html"><i class="fa fa-power-off"></i> Logout</a></li>
+            <li class="dropdown">
+                <a href="#" onmouseover="" class="dropbtn">View Cells</a>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="cell_profile.html">Najjeera</a>
+                    <a href="cell_profile.html">Bukoto</a>
+                    <a href="cell_profile.html">Kaliwajjala</a>
+                    <a href="cell_profile.html">Naalya</a>
+                </div>
+            </li>
+            <li><a href="view_all_members.html" class="selected"> View All Members</a></li>
+            <li><a href="register.html"> Register New Member</a></li>
+            <li><a href="./../index.html"> Home</a></li>
+            </div>
+            </li>
+        </ul>
+    </header><br><br>
+
+    <section>
+       <div id = "imager"></div>
+        <div class="topbar">
+            <div class="search">
+                <input type="text" id="myInput" onkeyup="" placeholder="Search Member by Member's Name"><button
+                    type="submit"><i class="fa fa-search"></i></button>
+            </div>
+   
+        </div>
+        <br><br>
+        <h2>Members Table</h2>
+        <table id="allparcels">
+            <thead>
+                <tr>
+                    <th class="th-sm">Name
+                    </th>
+                    <th class="th-sm">Gender
+                    </th>
+                    <th class="th-sm">Marital Status
+                    </th>
+                    <th class="th-sm">Cell
+                    </th>
+                    <th class="th-sm">Residence
+                    </th>
+                    <th class="th-sm">Phone
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Name
+                    </th>
+                    <th>Gender
+                    </th>
+                    <th>Marital Status
+                    </th>
+                    <th>Cell
+                    </th>
+                    <th>Residence
+                    </th>
+                    <th>Phone
+                    </th>
+                </tr>
+            </tfoot>
+
+
+        </table>
+
+        <div id="pag">
+            Members: <span id="ttl"></span> <button id="prevpg"><i class="fa fa-fw fa-chevron-left"></i></button>
+            <button id="nextpg"><i class="fa fa-fw fa-chevron-right"></i></button> <button id="firstpg">1</button>
+            <button id="list">Show All</button>
+        </div>
+    </section>
+
+    <footer>
+        <span>My E-Church &copy; 2019</span>
+    </footer>
+    <Script src="./../js/view_all_members.js"></Script>
+
+</body>
+
+</html>
