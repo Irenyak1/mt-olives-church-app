@@ -24,7 +24,7 @@ class DatabaseConnection:
     def setUp(self):
         members_table = """CREATE TABLE IF NOT EXISTS members(
             user_id SERIAL PRIMARY KEY,
-            user_id VARCHAR(100) NOT NULL,
+            name VARCHAR(100) NOT NULL,
             gender VARCHAR(100) NOT NULL,
             dateofbirth VARCHAR(100), 
             maritalstatus VARCHAR(100) NOT NULL,
@@ -39,7 +39,8 @@ class DatabaseConnection:
             dateofbaptism VARCHAR(100) NOT NULL,
             placeofbaptism VARCHAR(100) NOT NULL,
             baptisingpastor VARCHAR(100) NOT NULL,
-            formerreligion VARCHAR(100) NOT NULL)"""
+            formerreligion VARCHAR(100) NOT NULL,
+            image VARCHAR(10000000) NOT NULL)"""
         self.cursor.execute(members_table)
 
 
@@ -47,8 +48,8 @@ class DatabaseConnection:
     #         parcel_id SERIAL PRIMARY KEY,
     #         description VARCHAR NOT NULL,
     #         user_id INTEGER NOT NULL,
-    #         user_user_id VARCHAR(25) NOT NULL,
-    #         recipient_user_id VARCHAR(25) NOT NULL,
+    #         user_name VARCHAR(25) NOT NULL,
+    #         recipient_name VARCHAR(25) NOT NULL,
     #         recipient_mobile VARCHAR(25) NOT NULL,    
     #         pickup_location VARCHAR(225) NOT NULL,
     #         destination VARCHAR(225) NOT NULL,
@@ -65,28 +66,28 @@ class DatabaseConnection:
     #     self.cursor.execute(check_no_of_rows)
     #     result = self.cursor.fetchall()
     #     if len(result)==0:
-    #         insert_admin = "INSERT INTO users (user_user_id, user_email, user_mobile, user_password) values ('admin', 'admin@gmail.com', '0780456734', '{}')".format(password)
-    #         update_to_admin = "UPDATE users set admin_status = True where user_user_id = 'admin'"
-    #         # insert_img = "UPDATE users SET img = bytea('/home/daizy/Andela/Bootcamp14/Send_IT_APIs/app/controllers/dee.jpg') where user_user_id = 'admin'"
+    #         insert_admin = "INSERT INTO users (user_name, user_email, user_mobile, user_password) values ('admin', 'admin@gmail.com', '0780456734', '{}')".format(password)
+    #         update_to_admin = "UPDATE users set admin_status = True where user_name = 'admin'"
+    #         # insert_img = "UPDATE users SET img = bytea('/home/daizy/Andela/Bootcamp14/Send_IT_APIs/app/controllers/dee.jpg') where user_name = 'admin'"
     #         self.cursor.execute(insert_admin)
     #         self.cursor.execute(update_to_admin)
     #         # self.cursor.execute(insert_img)
           
-    def insert_member(self, user_id, gender, dateofbirth, maritalstatus,
+    def insert_member(self, name, gender, dateofbirth, maritalstatus,
                       cell, educationlevel, profession, occupation,
                       placeofwork, residence, phonecontact,
                       emailaddress, dateofbaptism, placeofbaptism,
-                      baptisingpastor, formerreligion):
-        insert_member = "INSERT INTO members (user_id, gender, dateofbirth, maritalstatus,\
+                      baptisingpastor, formerreligion, imageurl):
+        insert_member = "INSERT INTO members (name, gender, dateofbirth, maritalstatus,\
                                               cell, educationlevel, profession,\
                                               occupation, placeofwork, residence,\
                                               phonecontact, emailaddress,\
                                               dateofbaptism, placeofbaptism,\
-                                              baptisingpastor, formerreligion)\
+                                              baptisingpastor, formerreligion, image)\
                                               values ('{}', '{}', '{}', '{}',\
                                               '{}', '{}', '{}', '{}','{}',\
                                               '{}', '{}', '{}','{}', '{}', \
-                                              '{}', '{}')".format(user_id, gender, 
+                                              '{}', '{}', '{}')".format(name, gender, 
                                                             dateofbirth,
                                                             maritalstatus,
                                                             cell,
@@ -100,7 +101,8 @@ class DatabaseConnection:
                                                             dateofbaptism,
                                                             placeofbaptism,
                                                             baptisingpastor,
-                                                            formerreligion)
+                                                            formerreligion, 
+                                                            imageurl)
         self.cursor.execute(insert_member)
 
     def get_all_members(self):
@@ -125,7 +127,7 @@ class DatabaseConnection:
                       cell, educationlevel, profession, occupation,
                       placeofwork, residence, phonecontact,
                       emailaddress, dateofbaptism, placeofbaptism,
-                      baptisingpastor, formerreligion, user_id):
+                      baptisingpastor, formerreligion, name):
         update = " UPDATE members SET (gender, dateofbirth,\
                                        maritalstatus, cell,\
                                        educationlevel, profession,\
@@ -136,7 +138,7 @@ class DatabaseConnection:
                                        formerreligion) = ('{}', '{}', '{}',\
                                       '{}', '{}', '{}', '{}', '{}', '{}',\
                                       '{}', '{}', '{}', '{}', '{}','{}')\
-                                      WHERE user_id = '{}' ".format(gender,
+                                      WHERE name = '{}' ".format(gender,
                                                                  dateofbirth,
                                                                  maritalstatus,
                                                                  cell,
@@ -151,34 +153,34 @@ class DatabaseConnection:
                                                                  placeofbaptism,
                                                                  baptisingpastor,
                                                                  formerreligion,
-                                                                 user_id)
+                                                                 name)
         self.cursor.execute(update)
         print(update)
 
 
-    # def get_user(self, user_user_id):
-    #     get_user = "SELECT * FROM users WHERE user_user_id = '{}'".format(user_user_id)
+    # def get_user(self, user_name):
+    #     get_user = "SELECT * FROM users WHERE user_name = '{}'".format(user_name)
     #     self.cursor.execute(get_user)
     #     result = self.cursor.fetchone()
     #     return result
 
-    # def clear_data(self, user_user_id):
-    #     delete_content = "UPDATE users SET user_email = '' WHERE user_user_id = '{}'".format(user_user_id)
+    # def clear_data(self, user_name):
+    #     delete_content = "UPDATE users SET user_email = '' WHERE user_name = '{}'".format(user_name)
     #     self.cursor.execute(delete_content)
-    #     return user_user_id
+    #     return user_name
 
-    # def edit_user(self, user_email, user_mobile, default_pickup_location, user_user_id):
-    #     update = " UPDATE users SET (user_email, user_mobile, default_pickup_location) = ('{}', '{}', '{}') WHERE user_user_id = '{}' ".format(user_email, user_mobile, default_pickup_location, user_user_id)
+    # def edit_user(self, user_email, user_mobile, default_pickup_location, user_name):
+    #     update = " UPDATE users SET (user_email, user_mobile, default_pickup_location) = ('{}', '{}', '{}') WHERE user_name = '{}' ".format(user_email, user_mobile, default_pickup_location, user_name)
     #     self.cursor.execute(update)
     #     print(update)
 
-    # def login_user(self, user_user_id, user_password):
-    #     select_user = "SELECT user_user_id, user_password FROM users WHERE user_user_id = '{}' and user_password = '{}'".format(user_user_id, user_password)
+    # def login_user(self, user_name, user_password):
+    #     select_user = "SELECT user_name, user_password FROM users WHERE user_name = '{}' and user_password = '{}'".format(user_name, user_password)
     #     self.cursor.execute(select_user)
-    #     return [user_user_id,user_password]
+    #     return [user_name,user_password]
 
-    # def add_parcel(self, description, user_id, user_user_id, recipient_user_id, recipient_mobile, pickup_location, destination, weight, total_price):
-    #     insert_parcel = "INSERT INTO parcels (description, user_id, user_user_id, recipient_user_id, recipient_mobile, pickup_location, destination,  weight, total_price, present_location) values ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(description, user_id, user_user_id, recipient_user_id, recipient_mobile, pickup_location, destination, weight, total_price, pickup_location)
+    # def add_parcel(self, description, user_id, user_name, recipient_name, recipient_mobile, pickup_location, destination, weight, total_price):
+    #     insert_parcel = "INSERT INTO parcels (description, user_id, user_name, recipient_name, recipient_mobile, pickup_location, destination,  weight, total_price, present_location) values ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(description, user_id, user_name, recipient_name, recipient_mobile, pickup_location, destination, weight, total_price, pickup_location)
     #     self.cursor.execute(insert_parcel)
 
     # def get_all_parcels(self):
@@ -219,8 +221,8 @@ class DatabaseConnection:
     #     status = "UPDATE parcels SET status = '{}' WHERE parcel_id = '{}'".format(status, parcel_id)
     #     self.cursor.execute(status)
 
-    # def get_user(self, user_user_id):
-    #     get_user = "SELECT * FROM users WHERE user_user_id = '{}'".format(user_user_id)
+    # def get_user(self, user_name):
+    #     get_user = "SELECT * FROM users WHERE user_name = '{}'".format(user_name)
     #     self.cursor.execute(get_user)
     #     result = self.cursor.fetchone()
     #     return result
@@ -250,32 +252,32 @@ class DatabaseConnection:
     #     self.cursor.execute(delete)
 
     
-    # def select_no_of_user_parcels(self, useruser_id):
-    #     query = "SELECT COUNT(user_user_id) FROM parcels WHERE user_user_id = '{}'".format(useruser_id)
+    # def select_no_of_user_parcels(self, username):
+    #     query = "SELECT COUNT(user_name) FROM parcels WHERE user_name = '{}'".format(username)
     #     self.cursor.execute(query)
     #     result = self.cursor.fetchone()
     #     return result
 
-    # def select_no_of_user_parcels_cancelled(self, useruser_id):
-    #     query = "SELECT COUNT(user_user_id) FROM parcels WHERE user_user_id = '{}' and status = 'cancelled'".format(useruser_id)
+    # def select_no_of_user_parcels_cancelled(self, username):
+    #     query = "SELECT COUNT(user_name) FROM parcels WHERE user_name = '{}' and status = 'cancelled'".format(username)
     #     self.cursor.execute(query)
     #     result = self.cursor.fetchone()
     #     return result
 
-    # def select_no_of_user_parcels_pending(self, useruser_id):
-    #     query = "SELECT COUNT(user_user_id) FROM parcels WHERE user_user_id = '{}' and status = 'pending'".format(useruser_id)
+    # def select_no_of_user_parcels_pending(self, username):
+    #     query = "SELECT COUNT(user_name) FROM parcels WHERE user_name = '{}' and status = 'pending'".format(username)
     #     self.cursor.execute(query)
     #     result = self.cursor.fetchone()
     #     return result
 
-    # def select_no_of_user_parcels_intransit(self, useruser_id):
-    #     query = "SELECT COUNT(user_user_id) FROM parcels WHERE user_user_id = '{}' and status = 'intransit'".format(useruser_id)
+    # def select_no_of_user_parcels_intransit(self, username):
+    #     query = "SELECT COUNT(user_name) FROM parcels WHERE user_name = '{}' and status = 'intransit'".format(username)
     #     self.cursor.execute(query)
     #     result = self.cursor.fetchall()
     #     return result
 
-    # def select_no_of_user_parcels_delivered(self, useruser_id):
-    #     query = "SELECT COUNT(user_user_id) FROM parcels WHERE user_user_id = '{}' and status = 'delivered'".format(useruser_id)
+    # def select_no_of_user_parcels_delivered(self, username):
+    #     query = "SELECT COUNT(user_name) FROM parcels WHERE user_name = '{}' and status = 'delivered'".format(username)
     #     self.cursor.execute(query)
     #     result = self.cursor.fetchone()
     #     return result

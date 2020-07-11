@@ -7,6 +7,8 @@ from app.controllers.db import DatabaseConnection
 from app.validator import Validator
 from flask_jwt_extended import (create_access_token, get_jwt_identity)
 import datetime
+from werkzeug import secure_filename
+import os
 
 db = DatabaseConnection()
 
@@ -61,11 +63,32 @@ class User_Controller:
     # @staticmethod
     # def generate_hash(password):
     #     return sha256.hash(password)
+    #save image to a folder
+    @staticmethod
+    def saveToFolder():
+        user_input = request.get_json(force=True)
+        file = user_input.get("image")
+        print("the file is", file)
+        return file
+
+
+    
     @staticmethod
     def register_member():
         """Method to register a member"""
         db = DatabaseConnection()
+    
         user_input = request.get_json(force=True)
+        #uploadedImage = request.files["uploadedImage"]
+        #uploadedImage = user_input.get("uploadedImage")
+        #filename = secure_filename(uploadedImage.filename)
+        #filename.save(os.path.join("/images/", filename))
+
+        #uploadedImage.save(os.path.join("/images/", secure_filename(uploadedImage.filename)))
+
+
+        #print(uploadedImage)
+       
         name = user_input.get("name")
         gender = user_input.get("gender")
         dateofbirth = user_input.get("dateofbirth")
@@ -82,17 +105,19 @@ class User_Controller:
         placeofbaptism = user_input.get("placeofbaptism")
         baptisingpastor = user_input.get("baptisingpastor")
         formerreligion = user_input.get("formerreligion")
-     
+        image = user_input.get("image")
+
         register_member = db.insert_member(name, gender, dateofbirth, maritalstatus,
                       cell, educationlevel, profession, occupation,
                       placeofwork, residence, phonecontact,
                       emailaddress, dateofbaptism, placeofbaptism,
-                      baptisingpastor, formerreligion)
+                      baptisingpastor, formerreligion, image)
         return jsonify({'Success': "Member has been successfully registered"}), 201
 
     @staticmethod
     def get_members():
         """Retrieve all registered members"""
+        print(db.get_all_members())
         return jsonify({'message': db.get_all_members()})
     
     @staticmethod
