@@ -18,5 +18,4 @@ app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
 
 jwt = JWTManager(app)
 
-from app.routes import parcel_routes
 from app.routes import user_routes

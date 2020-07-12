@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body onload="getMembers()">
+<body onload="getCellMembers()">
     <header>
         <div class="brand">
             <span>SDA MT.OLIVES CHURCH</span>
@@ -28,10 +28,10 @@
             <li class="dropdown">
                 <a href="#" onmouseover="" class="dropbtn">View Cells</a>
                 <div id="myDropdown" class="dropdown-content">
-                    <a onclick="loadNaj()" id = "naj">Najjeera</a>
-                    <a onclick="loadBuk()" id = "buk">Bukoto</a>
-                    <a onclick="loadKyal()" id = "kal">Kaliwajjala</a>
-                    <a onclick="loadNal()" id = "nal">Naalya</a>
+                    <a href="cell_profile.html">Najjeera</a>
+                    <a href="cell_profile.html">Bukoto</a>
+                    <a href="cell_profile.html">Kaliwajjala</a>
+                    <a href="cell_profile.html">Naalya</a>
                 </div>
             </li>
             <li><a href="view_all_members.html" class="selected"> View All Members</a></li>
@@ -104,8 +104,7 @@
     <footer>
         <span>My E-Church &copy; 2019</span>
     </footer>
-    <Script src="./../js/view_all_members.js"></Script>
-    <script src="./../js/view_cell_data.js"></script>
+    <Script src="./../js/view_cell_data.js"></Script>
 
 </body>
 
