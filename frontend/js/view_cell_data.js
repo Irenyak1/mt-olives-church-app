@@ -1,37 +1,20 @@
-var e = document.getElementById("myDropdown");
-var strUser = e.options[e.selectedIndex].value;
-
 function loadNaj() {
-    najeera = document.getElementById("naj").innerHTML
-    let token = localStorage.getItem("access_token");
-    '/api/v1/members/cells/<cell>',
-    fetch(`http://localhost:5000/api/v1/members/cells/${najeera}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-        "Access-Control-Allow-Origin": "*"
-      }
-    })
-      .then(response => response.json())
-      .then(res => {
-        console.log("all the members are", res);
-        //   if (res.msg == "Token has expired") {
-        //     // customModal("Session expired! Login to proceed");
-        //     let ok = document.getElementById("ok");
-        //     ok.onclick = function() {
-        //       location.href = "../../index.html";
-        //     };
-        //   } else {
-  
-        let tdata = "";
-        //     let arr = [];
-        //     let myNewArr = [];
-        // loop throught the data returned by the request
-        res.message.forEach(member => {
-          document.getElementById("imager").innerHTML = member.image;
-  
-          //    if (parcel.status == "intransit" || parcel.status == "pending") {
-          tdata += `
+  najeera = document.getElementById("naj").innerHTML
+  let token = localStorage.getItem("access_token");
+  fetch(`http://localhost:5000/api/v1/members/cells/${najeera}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*"
+    }
+  })
+    .then(response => response.json())
+    .then(res => {
+      console.log("all the members are", res);
+      let tdata = "";
+      res.message.forEach(member => {
+        document.getElementById("imager").innerHTML = member.image;
+        tdata += `
                     <tr>
                          <td>${member.name}</td>
                          <td>${member.gender}</td>
@@ -42,8 +25,117 @@ function loadNaj() {
                          <td>  <a href = '../templates/view_one_member.html?id=${member.user_id}'> <button>view profile</button> </a></td>
     
                          </tr>`;
-        });
-        document.getElementById("tbody").innerHTML = tdata;
       });
-  }
-  
+      document.getElementById("tbody").innerHTML = tdata;
+    });
+}
+
+
+function loadBuk() {
+  bukoto = document.getElementById("buk").innerHTML
+  let token = localStorage.getItem("access_token");
+  fetch(`http://localhost:5000/api/v1/members/cells/${bukoto}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*"
+    }
+  })
+    .then(response => response.json())
+    .then(res => {
+      console.log("all the members are", res);
+
+      let tdata = "";
+
+      res.message.forEach(member => {
+        document.getElementById("imager").innerHTML = member.image;
+
+        tdata += `
+                    <tr>
+                         <td>${member.name}</td>
+                         <td>${member.gender}</td>
+                         <td>${member.maritalstatus}</td>
+                         <td>${member.cell}</td>
+                         <td>${member.residence}</td>
+                         <td>${member.phonecontact}</td>
+                         <td>  <a href = '../templates/view_one_member.html?id=${member.user_id}'> <button>view profile</button> </a></td>
+    
+                         </tr>`;
+      });
+      document.getElementById("tbody").innerHTML = tdata;
+    });
+}
+
+
+function loadKyal() {
+  kyal = document.getElementById("kal").innerHTML
+  let token = localStorage.getItem("access_token");
+  fetch(`http://localhost:5000/api/v1/members/cells/${kyal}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*"
+    }
+  })
+    .then(response => response.json())
+    .then(res => {
+      console.log("all the members are", res);
+
+
+      let tdata = "";
+
+      res.message.forEach(member => {
+        document.getElementById("imager").innerHTML = member.image;
+        tdata += `
+                    <tr>
+                         <td>${member.name}</td>
+                         <td>${member.gender}</td>
+                         <td>${member.maritalstatus}</td>
+                         <td>${member.cell}</td>
+                         <td>${member.residence}</td>
+                         <td>${member.phonecontact}</td>
+                         <td>  <a href = '../templates/view_one_member.html?id=${member.user_id}'> <button>view profile</button> </a></td>
+    
+                         </tr>`;
+      });
+      document.getElementById("tbody").innerHTML = tdata;
+    });
+}
+
+
+function loadNal() {
+  naalya = document.getElementById("nal").innerHTML
+  let token = localStorage.getItem("access_token");
+
+  fetch(`http://localhost:5000/api/v1/members/cells/${naalya}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*"
+    }
+  })
+    .then(response => response.json())
+    .then(res => {
+      console.log("all the members are", res);
+
+
+      let tdata = "";
+
+      res.message.forEach(member => {
+        document.getElementById("imager").innerHTML = member.image;
+
+        tdata += `
+                    <tr>
+                         <td>${member.name}</td>
+                         <td>${member.gender}</td>
+                         <td>${member.maritalstatus}</td>
+                         <td>${member.cell}</td>
+                         <td>${member.residence}</td>
+                         <td>${member.phonecontact}</td>
+                         <td>  <a href = '../templates/view_one_member.html?id=${member.user_id}'> <button>view profile</button> </a></td>
+    
+                         </tr>`;
+      });
+      document.getElementById("tbody").innerHTML = tdata;
+    });
+}

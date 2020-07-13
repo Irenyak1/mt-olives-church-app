@@ -1,14 +1,9 @@
 function GetoneMember(){
-
-    var canvas = document.getElementById('mycanvas');
+  console.log("do u see me")
 
     var r = window.location.href
-    image = new Image()
+    user_id = r.split('=')[1].split('%')[0]
     
-  
-    console.log("Page location is " + r.split('=')[1])
-    var user_id = r.split('=')[1]
-  
     let token = localStorage.getItem("access_token");
   
     fetch(`http://localhost:5000/api/v1/members/${user_id}`, {
@@ -23,9 +18,7 @@ function GetoneMember(){
     .then(response => response.json())
       .then(res => {
 
-        console.log("this is the data for a single user", res);
-        image.src = res.message.image
-        console.log("nanange image yeeno", image.src)
+        image = res.message.image
 
         document.getElementById("name").innerHTML = res.message.name
         document.getElementById("userid").innerHTML = res.message.user_id
@@ -43,7 +36,7 @@ function GetoneMember(){
 
         document.getElementById("bappas").innerHTML = res.message.baptisingpastor
         document.getElementById("formerrel").innerHTML = res.message.formerreligion
-        document.getElementById("imao").innerHTML = `<img src="${image.src}" alt="sddsfgdg"></img>`   
+        document.getElementById("imao").innerHTML = `<img src="${image}" alt="sddsfgdg"></img>`   
 
 
       
